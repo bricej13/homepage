@@ -168,7 +168,7 @@ export async function servicesFromKubernetes() {
       .filter((ingress) => ingress.metadata.annotations && ingress.metadata.annotations[`${ANNOTATION_BASE}/href`])
       ingressList.items.push(...traefikServices);
     }
-    
+
     if (!ingressList) {
       return [];
     }
@@ -261,6 +261,7 @@ export function cleanServiceGroups(groups) {
           server, // docker widget
           container,
           currency, // coinmarketcap widget
+          format, // calendar widget
           symbols,
           defaultinterval,
           site, // unifi widget
@@ -308,6 +309,9 @@ export function cleanServiceGroups(groups) {
         }
         if (type === "diskstation") {
           if (volume) cleanedService.widget.volume = volume;
+        }
+        if (type === "calendar") {
+          if (format) cleanedService.widget.format = format;
         }
       }
 
